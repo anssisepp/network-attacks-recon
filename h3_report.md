@@ -77,9 +77,12 @@ Signaali demoduloitiin valitsemalla URH:n antamista vaihtoehdoista ASK-modulaati
 
 Christian W. Zuckschwerdt 2026. rtl_433 repositorio. Luettavissa: https://github.com/merbanan/rtl_433
 
+Cornelius 2022. Decode 433.92 MHz weather station data. One Transistor. Luettavissa: https://www.onetransistor.eu/2022/01/decode-433mhz-ask-signal.html
+
 Fogelton, A. & Benesova, W. 2018. Eye blink completeness detection. Computer Vision and Image Understanding, 176–177, s. 78–85. https://doi.org/10.1016/j.cviu.2018.09.006
 
-Karvinen, Tero 2026. Verkkoon tunkeutuminen ja tiedustelu. Luettavissa: https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/
+Hubáček, M. 18.1.2019. Universal Radio Hacker SDR Tutorial on 433 MHz radio plugs. Video. Katsottavissa: https://youtu.be/sbqMqb6FVMY?t=199. Katsottu: 8.11.2026.
 
-Nurminen, Kasper 2025. h3 Aaltoja harjaamassa. Luettavissa: https://github.com/nurminenkasper/Verkkoon-tunkeutuminen-ja-tiedustelu/blob/main/h3/h3-Aaltoja-harjaamassa.md
+Karvinen, T. 2026. Verkkoon tunkeutuminen ja tiedustelu. Luettavissa: https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/
 
+Nurminen, K. 2025. h3 Aaltoja harjaamassa. Luettavissa: https://github.com/nurminenkasper/Verkkoon-tunkeutuminen-ja-tiedustelu/blob/main/h3/h3-Aaltoja-harjaamassa.md
