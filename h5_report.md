@@ -64,7 +64,7 @@ Ensimmäiseksi käynnistettiin Mininetin `/home/mininet/lab/01-Network-Security-
 
 Crowdstrike 2022. Address Resolution Protocol (ARP) Spoofing: What It Is and How to Prevent an ARP Attack. Luettavissa: https://www.crowdstrike.com/en-us/cybersecurity-101/social-engineering/arp-spoofing/
 
-Hakatemia. X11 Forwarding and SSH tunneling (port forwarding). Luettavissa: https://www.hakatemia.fi/en/courses/linux-management-and-hardening/x11-forwarding-and-ssh-tunneling-port-forwarding
+Hakatemia s.a. X11 Forwarding and SSH tunneling (port forwarding). Luettavissa: https://www.hakatemia.fi/en/courses/linux-management-and-hardening/x11-forwarding-and-ssh-tunneling-port-forwarding
 
 Iso-Anttila, Lari & Karvinen, Tero. 2026. Verkkoon tunkeutuminen ja tiedustelu. Luettavissa: https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/
 
