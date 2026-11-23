@@ -1,5 +1,3 @@
-#### Palautus on keskeneräinen ja valmistuu b) ja c) kohtien osalta myöhässä. 
-
 Tämä dokumentti on kirjoitettu vastauksena Lari Iso-Anttilan ja Tero Karvisen järjestämän [Verkkoon tunkeutuminen ja tiedustelu -kurssin](https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/) kotitehtävään _h5 Labratakki_. Suoritettujen harjoitusten alustana toimi _VMware Workstation Pro_ -virtualisointiohjelmistoon asennettu Kali-virtuaalikone ja tehtävänannossa annettu Mininet-verkkoemulaattori. 
 
 ### a) ARP-hyökkäys Mininet-ympäristössä
@@ -55,12 +53,45 @@ Ensimmäiseksi käynnistettiin Mininetin `/home/mininet/lab/01-Network-Security-
 
 <img width="2380" height="644" alt="Screenshot 2026-11-23 102815" src="https://github.com/user-attachments/assets/bfdb2032-25d4-4011-b44e-51bc96ccb2be" />
 
+TCP Session Hijacking -tehtävässä lähetettiin väärennetty TCP-paketti kahden koneen (`h1` ja `h2`) väliseen liikenteeseen. `h1`:llä ajettiin `tcp_server.py`-palvelinta, `h2`:lla `tcp_client.py`-asiakasta ja `h3`:lla `sniff_tcp_session.py`-kuunteluskriptiä sekä `tcp_hijack.py`-kaappausskriptiä. Haistelija eli `h3` näki toisten koneiden välisen yhteyden liikenteen sekä SEQ- ja ACK-numerot, ja `tcp_hijack.py` lähetti väärennetyn paketin, joka näytti tulevan `h2`:lta (`10.0.0.2`). 
+
+<img width="1872" height="930" alt="tcp_hijack" src="https://github.com/user-attachments/assets/c8301132-4926-44d7-a5de-bfde82d351e3" />
 
 
-### c) TCP SYN-Flood-hyökkäys
+### c) TCP SYN-Flood -hyökkäys
+
+Hakemistossa `~/lab/02-SDN_DDos_Simulation-tryout` olleita ja tehtävänannossa mainittuja työkaluja en saanut toimimaan, joten jatkoin a-tehtävässä luodussa ympäristössä.
+
+Tehtävän `README.md`-tiedosto oli suppea, joten hain lisätietoa SYN-Flood -hyökkäyksen toteuttamisesta pilvipalveluyhtiö [Akamain ohjeesta](https://www.akamai.com/cloud/guides/emulate-syn-flood-attack-with-kali-linux). Mininetissä ajoin hyökkäyksen koneelta `h3` kohteeseen `h2` komennolla:
+
+`h3 hping3 -S -i u40 -p 80 10.0.0.2`
+
+* `h3` suorittaa komennot h3-koneella
+* `hping3` on verkkopakettien lähettämisessä hyödynnettävä verkkotyökalu
+* `-S` ottaa käyttöön SYN-viestit
+* `-i u40` määrittää lähetysväliksi 40 mikrosekuntia
+* `-p 80 10.0.0.2` kohdeportti ja IP-osoite
+
+Keskeytin ajon nopeasti, koska paketteja lähti hyvin tiheään tahtiin. Lopetuksen yhteenvedosta voitiin nähdä, että vain muutamassa sekunnissa paketteja oli ehtinyt lähteä yli 1600 kappaletta:
+
+<img width="1176" height="218" alt="Screenshot 2026-11-24 004308" src="https://github.com/user-attachments/assets/7fd58d06-fa27-4c13-8bce-885e6d55c331" />
+
+SYN-Flood on palvelunestohyökkäys (DDoS), jonka tavoitteena on tehdä palvelin tavoittamattomaksi oikealle liikenteelle kuluttamalla sen käytettävissä olevat resurssit. Lähettämällä toistuvasti yhteyden avauspyyntöjä SYN-pakettien muodossa hyökkääjä ylikuormittaa kohdekoneen resursseja ja portteja, jolloin kohdelaite vastaa normaalille liikenteelle hitaasti tai ei lainkaan.
+
+Hyökkäys hyödyntää TCP-yhteyden muodostamisessa käytettävää kolmivaiheista kättelyä (_three-way handshake_). Normaalissa tilanteessa yhteys syntyy seuraavasti:
+
+* asiakas lähettää palvelimelle SYN-paketin aloittaakseen yhteyden  
+* palvelin vastaa SYN/ACK-paketilla kuitatakseen viestinnän  
+* asiakas lähettää takaisin ACK-paketin kuitatakseen vastaanottaneensa palvelimen paketin
+
+Tämän jälkeen TCP-yhteys on auki ja tiedonsiirto voi alkaa. SYN-Floodissa kättelyä ei viedä loppuun, vaan uusia SYN-paketteja saapuu jatkuvasti ja palvelin ylläpitää keskeneräisiä yhteyksiä tietyn ajan, jolloin sen resurssit ja avoimet yhteyspaikat täyttyvät, mikä johtaa siihen, että se ei pysty enää palvelemaan normaalia liikennettä kunnolla. (Cloudflare s.a.).
 
 
 #### Lähteet
+
+Akamai Technologies 2024. How to Emulate a SYN Flood Attack With Kali Linux. Luettavissa: https://www.akamai.com/cloud/guides/emulate-syn-flood-attack-with-kali-linux
+
+Cloudflare s.a. SYN flood attack. Luettavissa: https://www.cloudflare.com/learning/ddos/syn-flood-ddos-attack/
 
 Crowdstrike 2022. Address Resolution Protocol (ARP) Spoofing: What It Is and How to Prevent an ARP Attack. Luettavissa: https://www.crowdstrike.com/en-us/cybersecurity-101/social-engineering/arp-spoofing/
 
